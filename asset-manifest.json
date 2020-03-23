@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/arabiadex/static/css/main.5f361e03.chunk.css",
+    "main.js": "/arabiadex/static/js/main.c6ddd77a.chunk.js",
+    "main.js.map": "/arabiadex/static/js/main.c6ddd77a.chunk.js.map",
+    "runtime-main.js": "/arabiadex/static/js/runtime-main.cc1227cf.js",
+    "runtime-main.js.map": "/arabiadex/static/js/runtime-main.cc1227cf.js.map",
+    "static/js/2.26e5311d.chunk.js": "/arabiadex/static/js/2.26e5311d.chunk.js",
+    "static/js/2.26e5311d.chunk.js.map": "/arabiadex/static/js/2.26e5311d.chunk.js.map",
+    "index.html": "/arabiadex/index.html",
+    "precache-manifest.9afb096884c8726c54ded693bfde036b.js": "/arabiadex/precache-manifest.9afb096884c8726c54ded693bfde036b.js",
+    "service-worker.js": "/arabiadex/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/arabiadex/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.26e5311d.chunk.js.LICENSE.txt": "/arabiadex/static/js/2.26e5311d.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/arabiadex/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cc1227cf.js",
+    "static/js/2.26e5311d.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.c6ddd77a.chunk.js"
+  ]
+}
