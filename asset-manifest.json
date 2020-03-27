@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/arabiadex/static/css/main.5f361e03.chunk.css",
-    "main.js": "/arabiadex/static/js/main.9585b04e.chunk.js",
-    "main.js.map": "/arabiadex/static/js/main.9585b04e.chunk.js.map",
+    "main.css": "/arabiadex/static/css/main.4d7da72c.chunk.css",
+    "main.js": "/arabiadex/static/js/main.9cbc0244.chunk.js",
+    "main.js.map": "/arabiadex/static/js/main.9cbc0244.chunk.js.map",
     "runtime-main.js": "/arabiadex/static/js/runtime-main.cc1227cf.js",
     "runtime-main.js.map": "/arabiadex/static/js/runtime-main.cc1227cf.js.map",
-    "static/js/2.e6d46f55.chunk.js": "/arabiadex/static/js/2.e6d46f55.chunk.js",
-    "static/js/2.e6d46f55.chunk.js.map": "/arabiadex/static/js/2.e6d46f55.chunk.js.map",
+    "static/js/2.123235c3.chunk.js": "/arabiadex/static/js/2.123235c3.chunk.js",
+    "static/js/2.123235c3.chunk.js.map": "/arabiadex/static/js/2.123235c3.chunk.js.map",
     "index.html": "/arabiadex/index.html",
-    "precache-manifest.9ad6654431159c564fcb26bb9d3c9083.js": "/arabiadex/precache-manifest.9ad6654431159c564fcb26bb9d3c9083.js",
+    "precache-manifest.bcdb76817fc94a7c252dc382cf573fc2.js": "/arabiadex/precache-manifest.bcdb76817fc94a7c252dc382cf573fc2.js",
     "service-worker.js": "/arabiadex/service-worker.js",
-    "static/css/main.5f361e03.chunk.css.map": "/arabiadex/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.e6d46f55.chunk.js.LICENSE.txt": "/arabiadex/static/js/2.e6d46f55.chunk.js.LICENSE.txt"
+    "static/css/main.4d7da72c.chunk.css.map": "/arabiadex/static/css/main.4d7da72c.chunk.css.map",
+    "static/js/2.123235c3.chunk.js.LICENSE.txt": "/arabiadex/static/js/2.123235c3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.cc1227cf.js",
-    "static/js/2.e6d46f55.chunk.js",
-    "static/css/main.5f361e03.chunk.css",
-    "static/js/main.9585b04e.chunk.js"
+    "static/js/2.123235c3.chunk.js",
+    "static/css/main.4d7da72c.chunk.css",
+    "static/js/main.9cbc0244.chunk.js"
   ]
 }
