@@ -2,7 +2,12 @@ import React from 'react';
 import FormInput from '../../components/form-input/form-input.components';
 import CustomButton from '../../components/custom-button/custom-button.components';
 import ApiService from '../../service/ApiService';
+import {connect} from 'react-redux';
+import {setCurrentUser} from '../../redux/user/user.actions';
 import './Login.styles.scss';
+
+
+
 class  Login extends React.Component
 {
     constructor(props)
@@ -15,7 +20,21 @@ class  Login extends React.Component
     }
     handelSubmit = event => {
         event.preventDefault();
-        ApiService.login(this.state);
+        const {from,privatekey} =this.state;
+        ApiService.login({from:from}).then(ans =>{
+            console.log(ans);
+            // eslint-disable-next-line
+        if( ans.rows[0].user!==from){
+                ApiService.addPermission({from:from,privatekey:privatekey});}
+                const test=ApiService.accountCurrency({from:from});
+                test.then(user=>{
+                    console.log(user);
+                });
+               
+            }).catch((e)=>{
+            console.log('\nCaught exception: ' + e);
+            
+        });
     }
 
     handelChange = event => {
@@ -34,9 +53,12 @@ class  Login extends React.Component
                         <CustomButton type='button' name="setPermission" onClick={this.handelSubmit}>Login</CustomButton>
                     </div>
                 </form>
+                <div className='userInfo'>
+                        <h3 name='name'></h3>
+                </div>
             </div>
         )
     }
 }
 
-export default Login; 
+export default (Login); 

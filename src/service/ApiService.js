@@ -30,23 +30,9 @@ async function takeAction (action,datavalue)
     }
 }
 
-async function getAccountinfo (datavalue)
-{
-    const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
-    try{
-        const res=rpc.get_account(datavalue.from);  
-        return res;
-    }
-    catch(e){
-        console.log('\nCaught exception: ' + e);
-        if (e instanceof RpcError)
-        console.log(JSON.stringify(e.json, null, 2));
-    }
-    
-}
-
 async function getAccountCurrency(datavalue)
     {
+        console.log("currency"+datavalue);
         const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
         try{
             const res=rpc.get_currency_balance("eosio.token",datavalue.from,datavalue.symbol)
@@ -61,8 +47,8 @@ async function getAccountCurrency(datavalue)
 
 async function setPermission(datavalue)
 {
-    const privatekey=datavalue.privatekey;
-    console.log(privatekey);    
+    console.log("Permission data"+datavalue);
+    const privatekey=datavalue.privatekey;   
     const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
     const signatureProvider=new JsSignatureProvider([privatekey]);
     const api=new Api({rpc,signatureProvider,textDecoder :new TextDecoder(),textEncoder:new TextEncoder()});
@@ -101,6 +87,27 @@ async function setPermission(datavalue)
             expireSeconds: 30,
         });
         console.log(res);
+        try{
+            const resault=await api.transact({
+                actions:[{ 
+                    account:"jungledex151",
+                    name:'signin',
+                    authorization: [{
+                        actor:datavalue.from,
+                         permission:'active',
+                        }],
+                        data:{user:datavalue.from},
+                }]},
+                {
+                    blocksBehind:3,
+                    expireSeconds:30,
+            });
+        }
+        catch(e){
+            console.log('\nCaught exception: ' + e);
+            if (e instanceof RpcError)
+            console.log(JSON.stringify(e.json, null, 2));
+        }
     }
     catch(e){
         console.log('\nCaught exception: ' + e);
@@ -110,6 +117,7 @@ async function setPermission(datavalue)
 }
 async function findAccount(user)
 {
+    console.log("findAccount func"+user);
     const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
         try{
             const res=rpc.get_table_rows({
@@ -140,28 +148,21 @@ class ApiService{
     {   
         takeAction("sell",{from:from,quantity:quantity});                    
     }
-    static accountInfo(userName)
+  
+    static  accountCurrency({from:from})
     {
-         return getAccountinfo({from:userName});
-    }
-   
-    static  accountCurrency()
-    {
-        return getAccountCurrency({from:"jungledexts1",symbol:"EOS"});
-    }
-    static login({from,privatekey})
-    {
-        const res=findAccount(from)
-        .then(ans =>{
-            console.log(ans.rows[0]);
-          const f= ans.rows[0]? null:setPermission({from:from,privatekey:privatekey});
-        }).catch((e)=>{
-            console.log('\nCaught exception: ' + e);
-            if (e instanceof RpcError)
-            console.log(JSON.stringify(e.json, null, 2));
-        });
+        return getAccountCurrency({from:from});
     }
 
+    static login({from:from})
+    {
+        return findAccount(from);
+       
+    }
+    
+    static addPermission({from,privatekey}){
+        setPermission({from,privatekey});
+    }
 }
 
 export default ApiService;
