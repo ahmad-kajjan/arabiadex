@@ -15,7 +15,7 @@ class  Login extends React.Component
     }
     handelSubmit = event => {
         event.preventDefault();
-        ApiService.setState(this.state);
+        ApiService.login(this.state);
     }
 
     handelChange = event => {

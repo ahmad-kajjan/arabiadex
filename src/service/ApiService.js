@@ -108,6 +108,27 @@ async function setPermission(datavalue)
         console.log(JSON.stringify(e.json, null, 2));
     }
 }
+async function findAccount(user)
+{
+    const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
+        try{
+            const res=rpc.get_table_rows({
+                                        json:true,
+                                        code:"jungledex151",
+                                        scope:"jungledex151",
+                                        table:"accounttable",
+                                        lower_bound:user,
+                                        limit:1,
+                                        reverse:false,
+                                        show_payer:false});
+            return res;
+        }
+        catch(e){
+            console.log('\nCaught exception: ' + e);
+            if (e instanceof RpcError)
+            console.log(JSON.stringify(e.json, null, 2));
+        }
+}
 
 class ApiService{
     static buy({from,quantity})
@@ -128,10 +149,19 @@ class ApiService{
     {
         return getAccountCurrency({from:"jungledexts1",symbol:"EOS"});
     }
-    static addPermission({from,quantity})
+    static login({from,privatekey})
     {
-        setPermission({from:from,privatekey:quantity});
+        const res=findAccount(from)
+        .then(ans =>{
+            console.log(ans.rows[0]);
+          const f= ans.rows[0]? null:setPermission({from:from,privatekey:privatekey});
+        }).catch((e)=>{
+            console.log('\nCaught exception: ' + e);
+            if (e instanceof RpcError)
+            console.log(JSON.stringify(e.json, null, 2));
+        });
     }
+
 }
 
 export default ApiService;
