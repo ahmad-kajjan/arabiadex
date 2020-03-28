@@ -1,0 +1,28 @@
+.action-container{
+    height: 100%;
+    width: 50vw;
+    position: relative;
+    margin:40px 20px;
+    border: solid grey 2px;
+    align-items: center;
+    .action-type{
+        font-size: 30px;
+        color:darkblue;
+        top:-45px;
+        left:20px;
+        background-color: white;
+       
+        position: absolute;
+    }
+    .inputs{
+        width: 40vw;
+        padding: 20px 20px;
+    }
+    .button{
+        display: flex;
+        justify-content: right;
+        position: absolute;
+        right: 20px;
+        bottom:-20px;
+    }
+}

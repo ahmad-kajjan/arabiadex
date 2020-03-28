@@ -14,7 +14,7 @@ class UserPage extends React.Component{
     }
     render(){
         return(
-            <div claseName='userpage'>
+            <div className='userpage'>
                 <div className='userprofile'>
                     <UserProfile/>
                 </div>
