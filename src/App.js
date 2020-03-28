@@ -17,7 +17,7 @@ class App extends React.Component{
         <div className='mainpage'>
           <Route exact path='/arabiadex' component={HomePage}  />
           <Route exact path='/' component={HomePage}/>
-          <Route exact path='/userpage' render={()=>!(this.props.currencyBalance&&this.props.currentUser) ? (<Redirect to='/login'/>):(<UserPage/>)}/>
+          <Route exact path='/userpage' render={()=>(this.props.currentUser) ? (<UserPage/>):(<Redirect to='/login'/>)}/>
           <Route exact path='/login'  render={()=>(this.props.currencyBalance&&this.props.currentUser) ? (<Redirect to='/userpage'/>):(<Login/>)}/>
         </div>
       </div>

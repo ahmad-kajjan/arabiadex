@@ -15,7 +15,7 @@ async function takeAction (action,datavalue)
                     actor:datavalue.from,
                      permission:'active',
                     }],
-                    data:{from:datavalue.from,quantity:datavalue.quantity},
+                    data:datavalue,
             }]},
             {
                 blocksBehind:3,
@@ -86,30 +86,9 @@ async function setPermission(datavalue)
             blocksBehind: 3,
             expireSeconds: 30,
         });
-        console.log(res);
-        try{
-            const resault=await api.transact({
-                actions:[{ 
-                    account:"jungledex151",
-                    name:'signin',
-                    authorization: [{
-                        actor:datavalue.from,
-                         permission:'active',
-                        }],
-                        data:{user:datavalue.from},
-                }]},
-                {
-                    blocksBehind:3,
-                    expireSeconds:30,
-            });
-        }
-        catch(e){
-            console.log('\nCaught exception: ' + e);
-            if (e instanceof RpcError)
-            console.log(JSON.stringify(e.json, null, 2));
-        }
-    }
-    catch(e){
+            return res;
+      
+    }catch(e){
         console.log('\nCaught exception: ' + e);
         if (e instanceof RpcError)
         console.log(JSON.stringify(e.json, null, 2));
@@ -161,8 +140,11 @@ class ApiService{
     }
     
     static addPermission({from,privatekey}){
-        setPermission({from,privatekey});
+        const res=setPermission({from,privatekey});
+        res.then(()=>{
+            const result=takeAction("signin",{from:from});
+        })
     }
-}
+} 
 
 export default ApiService;
