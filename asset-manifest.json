@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/arabiadex/static/css/main.538d8c3b.chunk.css",
-    "main.js": "/arabiadex/static/js/main.6884d7b0.chunk.js",
-    "main.js.map": "/arabiadex/static/js/main.6884d7b0.chunk.js.map",
+    "main.js": "/arabiadex/static/js/main.aced5925.chunk.js",
+    "main.js.map": "/arabiadex/static/js/main.aced5925.chunk.js.map",
     "runtime-main.js": "/arabiadex/static/js/runtime-main.cc1227cf.js",
     "runtime-main.js.map": "/arabiadex/static/js/runtime-main.cc1227cf.js.map",
     "static/js/2.c6625afc.chunk.js": "/arabiadex/static/js/2.c6625afc.chunk.js",
     "static/js/2.c6625afc.chunk.js.map": "/arabiadex/static/js/2.c6625afc.chunk.js.map",
     "index.html": "/arabiadex/index.html",
-    "precache-manifest.480edd39707bee8b56eeb6f6965a0313.js": "/arabiadex/precache-manifest.480edd39707bee8b56eeb6f6965a0313.js",
+    "precache-manifest.f8a07df99bfa25165adb9df10d2c662a.js": "/arabiadex/precache-manifest.f8a07df99bfa25165adb9df10d2c662a.js",
     "service-worker.js": "/arabiadex/service-worker.js",
     "static/css/main.538d8c3b.chunk.css.map": "/arabiadex/static/css/main.538d8c3b.chunk.css.map",
     "static/js/2.c6625afc.chunk.js.LICENSE.txt": "/arabiadex/static/js/2.c6625afc.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.cc1227cf.js",
     "static/js/2.c6625afc.chunk.js",
     "static/css/main.538d8c3b.chunk.css",
-    "static/js/main.6884d7b0.chunk.js"
+    "static/js/main.aced5925.chunk.js"
   ]
 }

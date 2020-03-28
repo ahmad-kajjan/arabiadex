@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8af4fbfe57908d2832e7469a13868574",
+    "revision": "313143f330d1e2031f3b8b1afe5b3b48",
     "url": "/arabiadex/index.html"
   },
   {
-    "revision": "40dc60579112eda993e2",
+    "revision": "5395fc5ad786c53d7b12",
     "url": "/arabiadex/static/css/main.538d8c3b.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/arabiadex/static/js/2.c6625afc.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "40dc60579112eda993e2",
-    "url": "/arabiadex/static/js/main.6884d7b0.chunk.js"
+    "revision": "5395fc5ad786c53d7b12",
+    "url": "/arabiadex/static/js/main.aced5925.chunk.js"
   },
   {
     "revision": "8b9431416b16a0b37a1f",
