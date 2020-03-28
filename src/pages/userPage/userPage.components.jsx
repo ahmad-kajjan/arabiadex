@@ -3,7 +3,6 @@ import React from 'react';
 import UserAction from '../../components/user-action/user-action.components';
 import UserProfile from '../../components/user-profile/user-profile.components';
 import {connect} from 'react-redux';
-
 import './userPage.styles.scss';
 
 class UserPage extends React.Component{

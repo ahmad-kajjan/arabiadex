@@ -21,7 +21,7 @@ async function takeAction (action,datavalue)
                 blocksBehind:3,
                 expireSeconds:30,
             });
-            console.log(resultWithConfig);
+            return resultWithConfig;
     }
     catch(e){
         console.log('\nCaught exception: ' + e);
@@ -141,12 +141,12 @@ async function findAccount(user)
 class ApiService{
     static buy({from,quantity})
     {   
-       takeAction("buy",{from:from,quantity:quantity});                        
+         return  takeAction("buy",{from:from,quantity:quantity});                        
     }
 
     static sell({from,quantity})
     {   
-        takeAction("sell",{from:from,quantity:quantity});                    
+        return takeAction("sell",{from:from,quantity:quantity});                    
     }
   
     static  accountCurrency({from:from})

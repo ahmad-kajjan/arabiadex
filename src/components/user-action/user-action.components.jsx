@@ -2,7 +2,8 @@ import React from 'react';
 import ApiService from '../../service/ApiService';
 import FormInput from '../form-input/form-input.components';
 import CustomButton from '../custom-button/custom-button.components';
-
+import {connect} from 'react-redux';
+import {setCurrencyBalance,setCurrentUser} from '../../redux/user/user.actions';
 import './user-action.styles.scss';
 
 class userAction extends React.Component{
@@ -16,12 +17,26 @@ class userAction extends React.Component{
     handelSubmit=event=>
     {
         event.preventDefault();
+        const user=this.state.from;
         const quantity=this.state.amount +'.0000 '+this.props.symbol;
-        if(this.props.type==="sell")
-            ApiService.sell({from:this.state.from,quantity:quantity});
-        else if(this.props.type==="buy")
-            ApiService.buy({from:this.state.from,quantity:quantity});
-
+        if(this.props.type==="sell"){
+          ApiService.sell({from:this.state.from,quantity:quantity}).then(()=>
+          {
+                const res=ApiService.accountCurrency({from:user});
+                res.then(currency=>{
+                this.props.setCurrencyBalance(currency);
+                });
+            })
+        }
+        else if(this.props.type==="buy"){
+           ApiService.buy({from:this.state.from,quantity:quantity}).then(()=>
+           {
+                const res=ApiService.accountCurrency({from:user});
+                res.then(currency=>{
+                this.props.setCurrencyBalance(currency);
+                });
+            })
+        }
     }   
     handelChange = event => {
         const {value,name} =event.target;
@@ -47,5 +62,8 @@ class userAction extends React.Component{
 
     }
 }
-
-export default userAction;
+const mapDispatchToProps = dispatch =>({
+        setCurrentUser:user=>dispatch(setCurrentUser(user)),
+        setCurrencyBalance: currency=>dispatch(setCurrencyBalance(currency))
+});
+export default connect(null,mapDispatchToProps) (userAction);
