@@ -13,7 +13,7 @@ class userProfile extends React.Component{
                     <div className='currencytable'>
                         {
                         this.props.currencyBalance.map(currency=>(
-                            <div>
+                            <div className='currency'>
                                 {currency}
                             </div>)
                             )

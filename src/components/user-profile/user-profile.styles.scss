@@ -1,0 +1,21 @@
+.userprofile{
+    height: 100%;
+    width: 30vw;
+    text-align: center;
+    position: relative;
+    margin:40px 20px;
+    border: solid grey 2px;
+    .username{
+        padding: 20px 20px;
+        font-size: 50px;
+        color:teal;
+    }
+    .currencytable{
+       font-family:sans-serif;
+       .currency{
+            width: 100%;
+            font-size: 20px;
+            color:brown;
+       }
+    }
+}

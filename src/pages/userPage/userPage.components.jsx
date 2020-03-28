@@ -15,12 +15,12 @@ class UserPage extends React.Component{
     render(){
         return(
             <div className='userpage'>
-                <div className='userprofile'>
-                    <UserProfile/>
-                </div>
                 <div className='useractions'>
                     <UserAction type="sell" symbol="JUNGLE"/>
                     <UserAction type="buy"  symbol="JUNGLE"/>
+                </div>
+                <div className='userinfo'> 
+                    <UserProfile/>
                 </div>
             </div>
             );
