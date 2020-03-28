@@ -3,7 +3,7 @@ import {JsSignatureProvider} from 'eosjs/dist/eosjs-jssig';
 async function takeAction (action,datavalue)
 {
     const privatekey="5JTnHdR2g8K8eizSeVdLYV4jEMZZv5FqZraSuFXLxH1b8efTR5b";
-    const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
+    const rpc=new JsonRpc('https://jungle2.cryptolions.io:443',{fetch});
     const signatureProvider=new JsSignatureProvider([privatekey]);
     const api=new Api({rpc,signatureProvider,textDecoder :new TextDecoder(),textEncoder:new TextEncoder()});
     try{
@@ -33,7 +33,7 @@ async function takeAction (action,datavalue)
 async function getAccountCurrency(datavalue)
     {
         console.log("currency"+datavalue);
-        const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
+        const rpc=new JsonRpc('https://jungle2.cryptolions.io:443',{fetch});
         try{
             const res=rpc.get_currency_balance("eosio.token",datavalue.from,datavalue.symbol)
             return res;
@@ -49,7 +49,7 @@ async function setPermission(datavalue)
 {
     console.log("Permission data"+datavalue);
     const privatekey=datavalue.privatekey;   
-    const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
+    const rpc=new JsonRpc('https://jungle2.cryptolions.io:443',{fetch});
     const signatureProvider=new JsSignatureProvider([privatekey]);
     const api=new Api({rpc,signatureProvider,textDecoder :new TextDecoder(),textEncoder:new TextEncoder()});
     try{
@@ -97,7 +97,7 @@ async function setPermission(datavalue)
 async function findAccount(user)
 {
     console.log("findAccount func"+user);
-    const rpc=new JsonRpc('http://jungle2.cryptolions.io:80',{fetch});
+    const rpc=new JsonRpc('https://jungle2.cryptolions.io:443',{fetch});
         try{
             const res=rpc.get_table_rows({
                                         json:true,
