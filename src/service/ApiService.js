@@ -70,42 +70,6 @@ class ApiService{
             if (e instanceof RpcError)
             console.log(JSON.stringify(e.json, null, 2));
     */
-    static buy({from,quantity})
-    {   
-         return  takeAction("buy",{from:from,quantity:quantity});                        
-    }
-
-    static sell({from,quantity})
-    {   
-        return takeAction("sell",{from:from,quantity:quantity});                    
-    }
-  
-    static  accountCurrency({from:from})
-    {
-        return getAccountCurrency({from:from});
-    }
-
-    static login({from:from})
-    {
-        return getTablesInfo({
-            code:eosContractAccountInfo.username,
-            scope:eosContractAccountInfo.username,
-            table:'accounttable',
-            searchBy:from
-        });
-       
-    }
-    
-    static addPermission({from,privatekey}){
-        const res=setPermission({from,privatekey});
-        res.then(()=>{
-            const result=takeAction("signin",{user:from}).then(
-                test=>{
-                console.log(res)
-                }
-            );
-        })
-    }
 } 
 
 export default ApiService;
