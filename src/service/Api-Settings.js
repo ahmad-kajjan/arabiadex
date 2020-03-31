@@ -5,3 +5,6 @@ export const eosContractAccountInfo={
 export const eosTestnetApi={
     url:'https://jungle2.cryptolions.io:443'
 };
+export const eosTransferContractAccount={
+    contractAccount:"eosio.token"
+};

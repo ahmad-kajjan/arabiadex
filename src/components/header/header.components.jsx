@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {setCurrentUser} from '../../redux/user/user.actions';
+import {setFirstUser,setSecondUser,setContractUser} from '../../redux/user/user.actions';
 import './header.styles.scss';
 
 class header extends React.Component{
@@ -10,7 +10,9 @@ class header extends React.Component{
         super(props);
     }
     signout = event=>{
-        this.props.setCurrentUser(null);
+        this.props.setFirstUser(null);
+        this.props.setSecondUser(null);
+        this.props.setContractUser(null);
     }
  render(){ 
    return (
@@ -19,7 +21,7 @@ class header extends React.Component{
                 <img src ="https://media.caramel.la/_CdWCc2Nz?e=0,0,340,587&r=80"  alt="icon" className='icon' />
             </Link>
             <div className="options">
-                {  this.props.currentUser ?
+                {  this.props.firstUser&&this.props.secondUser ?
                     <div className='option' onClick={this.signout}>
                         Logout
                     </div>:
@@ -36,10 +38,23 @@ class header extends React.Component{
     )
             }
 }
-const mapStateToProps = state=>({
-    currentUser:state.user.currentUser
+const mapStateToProps =state=>({
+    firstUser:state.user.firstUser,
+    firstUserPrivateKey:state.user.firstUserPrivateKey,
+    firstUserBalance:state.user.firstUserBalance,
+    contractUser:state.user.contractUser,
+    contratUserPrivateKey:state.user.contractUserPrivateKey,
+    contractUserBalance:state.user.contractUserBalance,
+    secondUser:state.user.secondUser,
+    secondUserPrivateKey:state.user.secondUserPrivateKey,
+    secondUserBalance:state.user.secondUserBalance,
+    
 })
+
 const mapDispatchToProps=dispatch=>({
-    setCurrentUser:user=>dispatch(setCurrentUser(user))
+    setFirstUser:user=>dispatch(setFirstUser(user)),
+    setSecondUser:user=>dispatch(setSecondUser(user)),
+    setContractUser:user=>dispatch(setContractUser(user)),
+
 })
 export default connect(mapStateToProps,mapDispatchToProps)(header);

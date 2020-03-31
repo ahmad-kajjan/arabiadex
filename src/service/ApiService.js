@@ -1,9 +1,9 @@
 import {Api,JsonRpc,RpcError} from 'eosjs';
 import {JsSignatureProvider} from 'eosjs/dist/eosjs-jssig';
-import {eosContractAccountInfo,eosTestnetApi} from './Api-Settings';
+import {eosTestnetApi,eosContractAccountInfo, eosTransferContractAccount} from './Api-Settings';
 
 
-async function takeAction (api,action,contractaccount,privatekey,datavalue)
+async function takeAction (api,action,contractaccount,privatekey,actor,datavalue)
 {
     const rpc=new JsonRpc(api,{fetch});
     const signatureProvider=new JsSignatureProvider([privatekey]);
@@ -14,7 +14,7 @@ async function takeAction (api,action,contractaccount,privatekey,datavalue)
                 account:contractaccount,
                 name:action,
                 authorization: [{
-                    actor:datavalue.from,
+                    actor:actor,
                      permission:'active',
                     }],
                     data:datavalue,
@@ -30,12 +30,12 @@ async function takeAction (api,action,contractaccount,privatekey,datavalue)
     }
 }
 
-async function getAccountCurrency(api,contractaccount,datavalue)
+async function getAccountCurrency(api,contractaccount,accountName,symbol)
     {
         console.log("currency"+datavalue);
         const rpc=new JsonRpc(api,{fetch});
         try{
-            const res=rpc.get_currency_balance(contractaccount,datavalue.from,datavalue.symbol);
+            const res=rpc.get_currency_balance(contractaccount,accountName,symbol);
             return res;
         }
         catch(e){
@@ -64,12 +64,21 @@ async function getTablesInfo(api,datavalue)
 }
 
 class ApiService{
-    /* 
-        for error later
-        console.log('\nCaught exception: ' + e);
-            if (e instanceof RpcError)
-            console.log(JSON.stringify(e.json, null, 2));
-    */
+ 
+   static make_transfer(action,actor,privatekey,datavalue)
+   {
+        return takeAction(eosTestnetApi.url,action,
+                        eosTransferContractAccount.contractAccount,
+                        actor,privatekey,datavalue);
+   }
+   static geteosAccountBalance=(accountName)=>
+   {
+        
+        return getAccountCurrency(eosTestnetApi.url
+            ,eosTransferContractAccount.contractAccount
+            ,accountName,null);
+        
+   }
 } 
 
 export default ApiService;

@@ -2,8 +2,9 @@ import React from 'react';
 import FormInput from '../../components/form-input/form-input.components';
 import CustomButton from '../../components/custom-button/custom-button.components';
 import ApiService from '../../service/ApiService';
+import {eosContractAccountInfo} from '../../service/Api-Settings';
 import {connect} from 'react-redux';
-import {setCurrencyBalance, setCurrentUser} from '../../redux/user/user.actions';
+import { setFirstUser, setFirstUserBalance, setSecondUser, setSecondUserPrivateKey, setSecondUserBalance, setContractUser, setContractUserPrivateKey, setContractUserBalance} from '../../redux/user/user.actions';
 import './Login.styles.scss';
 
 
@@ -14,8 +15,10 @@ class  Login extends React.Component
     {
         super(props);
         this.state = {
-              from  : '',
-              privatekey : '',
+              firstUser  : '',
+              firstUserPrivateKey : '',
+              secondUser :'',
+              secondUserPrivateKey:'',
         }
       
     }
@@ -23,20 +26,24 @@ class  Login extends React.Component
     handelSubmit = event => {
        
         event.preventDefault();
-        const {from,privatekey} =this.state;
-        ApiService.login({from:from}).then(ans =>{
-            console.log(ans);
-            if( ans.rows[0].user!==from){
-                ApiService.addPermission({from:from,privatekey:privatekey});}
-                const test=ApiService.accountCurrency({from:from});
-                test.then(currency=>{
-                        this.props.setCurrentUser(from);
-                        this.props.setCurrencyBalance(currency);
-                    });
-               
-            }).catch((e)=>{
-            console.log('\nCaught exception: ' + e);
-            
+        this.props.setContractUserPrivateKey(eosContractAccountInfo.private_key);
+        this.props.setContractUser(eosContractAccountInfo.username);
+        const {firstUser,firstUserPrivateKey,secondUser,secondUserPrivateKey} =this.state;
+        this.props.setFirstUser(firstUser);
+        this.props.setFirstUserPrivateKey(firstUserPrivateKey);
+        this.props.setSecondUser(secondUser);
+        this.props.etSecondUserPrivateKey(secondUserPrivateKey);
+        const res1=ApiService.geteosAccountBalance(firstUser);
+        res1.then(currency=>{
+            this.props.setFirstUserBalance(currency.rows[0]);
+        });
+        const res2=ApiService.geteosAccountBalance(secondUser);
+        res2.then(currency=>{
+            this.props.setSecondtUserBalance(currency.rows[0]);
+        });
+        const res3=ApiService.geteosAccountBalance(eosContractAccountInfo.username);
+        res3.then(currency=>{
+            this.props.setContractUserBalance(currency.rows[0]);
         });
     }
     handelChange = event => {
@@ -49,8 +56,11 @@ class  Login extends React.Component
             <div className="Login" >
                 <h2>USE  your jungle testnet account </h2>
                 <form >
-                     <FormInput name="from"  value={this.state.from} handelchange={this.handelChange} label={"account_name"} required />
-                     <FormInput name="privatekey"  value={this.state.privatekey} handelchange={this.handelChange} label={"Enter your private Key "} required />
+                     <FormInput name="firstUser"  value={this.state.firstUser} handelchange={this.handelChange} label={"first account name"} required />
+                     <FormInput name="firstUserPrivateKey"  value={this.state.firstUserPrivateKey} handelchange={this.handelChange} label={"Enter first account's private Key "} required />
+
+                    <FormInput name="secondUser"  value={this.state.secondUser} handelchange={this.handelChange} label={"second account name"} required />
+                     <FormInput name="secondUserPrivateKey"  value={this.state.secondUserPrivateKey} handelchange={this.handelChange} label={"Enter second account's private Key "} required />
                     <div className ="buttons">
                         <CustomButton type='button' name="login" onClick={this.handelSubmit}>Login</CustomButton>
                     </div>
@@ -60,13 +70,28 @@ class  Login extends React.Component
     }
 }
 const mapStateToProps =state=>({
-    currentUser:state.user.currentUser,
-    currencyBalance:state.user.currencyBalance
+    firstUser:state.user.firstUser,
+    firstUserPrivateKey:state.user.firstUserPrivateKey,
+    firstUserBalance:state.user.firstUserBalance,
+    contractUser:state.user.contractUser,
+    contratUserPrivateKey:state.user.contractUserPrivateKey,
+    contractUserBalance:state.user.contractUserBalance,
+    secondUser:state.user.secondUser,
+    secondUserPrivateKey:state.user.secondUserPrivateKey,
+    secondUserBalance:state.user.secondUserBalance,
+    
 })
 
 const mapDispatchToProps=dispatch=>({
-    setCurrentUser:user=>dispatch(setCurrentUser(user)),
-    setCurrencyBalance: currency=>dispatch(setCurrencyBalance(currency))
+    setFirstUser:user=>dispatch(setFirstUser(user)),
+    setFirstUserPrivateKey:privatekey=>dispatch(setFirstUserPrivateKey(privatekey)),
+    setFirstUserBalance: currency=>dispatch(setFirstUserBalance(currency)),
+    setSecondUser:user=>dispatch(setSecondUser(user)),
+    setSecondUserPrivateKey:privatekey=>dispatch(setSecondUserPrivateKey(privatekey)),
+    setSecondUserBalance: currency=>dispatch(setSecondUserBalance(currency)),
+    setContractUser:user=>dispatch(setContractUser(user)),
+    setContractUserPrivateKey:privatekey=>dispatch(setContractUserPrivateKey(privatekey)),
+    setContractUserBalance: currency=>dispatch(setContractUserBalance(currency))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login); 
