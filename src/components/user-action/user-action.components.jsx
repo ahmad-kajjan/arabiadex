@@ -62,7 +62,7 @@ class userAction extends React.Component{
                     <div className='inputs'>
                         <FormInput name="price"  value={this.state.price} handelchange={this.handelChange} label="enter your price offer"/>
                         <FormInput name="amount"  value={this.state.amount} handelchange={this.handelChange} label={"amount to "+this.props.type +" PS:1 equals to 1.0000 in JUNGLE Currency"}/>
-                        <FormInput name="total"  value={this.state.total}  handelchange={this.handelChange} label="total eos price"/>
+                        <FormInput name="total"  value={this.state.total=this.state.amount *this.state.price}  handelchange={this.handelChange} />
                         <FormInput name="receiver" value={this.state.receiver} handelchange={this.handelChange} label="receiver account"/>
                     </div>
                     <div className='button'>
