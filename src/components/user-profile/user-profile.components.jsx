@@ -12,19 +12,16 @@ class userProfile extends React.Component{
                     <div className='username'>{this.props.currentUser}</div>
                     <div className='currencytable'>
                         {
-                        this.props.currencyBalance.map(currency=>(
-                            <div className='currency'>
-                                {currency}
-                            </div>)
-                            )
+                             this.props.currentBalance.map(currency=>(
+                                <div className='currency'>
+                                    {currency}
+                                </div>)
+                                )    
                         }
                     </div>
             </div>
-         );
+        )
     }
 }
-const mapStatetoProps = state=>({
-    currentUser:state.user.currentUser,
-    currencyBalance:state.user.currencyBalance
-})
-export default connect(mapStatetoProps)(userProfile);
+
+export default userProfile;

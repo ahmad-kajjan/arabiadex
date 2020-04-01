@@ -1,13 +1,17 @@
 .userpage{
     height: 100%;
     display: flex;
-    justify-content: space-between;
     padding: 20px 20px;
     margin: 20px 20px;
-    .userprofile{
-        height: 25%;
-    }
-    .useractions{
-        height: 25%;
+    .oneUser{
+        .userprofile{
+            height: 25%;
+           left: 50px;
+        }
+        .useractions{
+            height: 40%;
+            padding:10px 10px;
+            margin-top: 20px;
+        }
     }
 }

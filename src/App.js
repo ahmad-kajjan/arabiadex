@@ -17,11 +17,8 @@ class App extends React.Component{
         <div className='mainpage'>
           <Route exact path='/arabiadex' component={HomePage}  />
           <Route exact path='/' component={HomePage}/>
-          <Route exact path='/userpage' render={()=>(this.props.firstUser&&this.props.secondUser
-                                                    &&this.props.firstUserPrivateKey&&this.props.secondUserPrivateKey) ? (<UserPage/>):(<Redirect to='/login'/>)}/>
-          <Route exact path='/login'  render={()=>(this.props.secondUser&&this.props.firstUser
-                                                  &&this.props.firstUserBalance&&this.props.secondUserBalance
-                                                  &&this.props.firstUserPrivateKey&&this.props.secondUserPrivateKey) ? (<Redirect to='/userpage'/>):(<Login/>)}/>
+          <Route exact path='/userpage' render={()=>( (this.props.users&&this.props.privateKeys))  ? (<UserPage/>):(<Redirect to='/login'/>)}/>
+          <Route exact path='/login'  render={()=>( (this.props.secondUserBalance))  ? (<Redirect to='/userpage'/>):(<Login/>)}/>
         </div>
       </div>
     );
@@ -29,14 +26,9 @@ class App extends React.Component{
 }
 
 const mapStateToProps =state=>({
-  firstUser:state.user.firstUser,
-  firstUserPrivateKey:state.user.firstUserPrivateKey,
+  users:state.user.users,
+  privateKeys:state.user.privateKeys,
   firstUserBalance:state.user.firstUserBalance,
-  contractUser:state.user.contractUser,
-  contratUserPrivateKey:state.user.contractUserPrivateKey,
-  contractUserBalance:state.user.contractUserBalance,
-  secondUser:state.user.secondUser,
-  secondUserPrivateKey:state.user.secondUserPrivateKey,
   secondUserBalance:state.user.secondUserBalance,
   
 })

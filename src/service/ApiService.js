@@ -3,10 +3,12 @@ import {JsSignatureProvider} from 'eosjs/dist/eosjs-jssig';
 import {eosTestnetApi,eosContractAccountInfo, eosTransferContractAccount} from './Api-Settings';
 
 
-async function takeAction (api,action,contractaccount,privatekey,actor,datavalue)
+async function takeAction (apiurl,action,contractaccount,actor,privatekey,datavalue)
 {
-    const rpc=new JsonRpc(api,{fetch});
-    const signatureProvider=new JsSignatureProvider([privatekey]);
+    console.log(privatekey);
+    const PrivateKey=privatekey;
+    const rpc=new JsonRpc(apiurl,{fetch});
+    const signatureProvider=new JsSignatureProvider([PrivateKey]);
     const api=new Api({rpc,signatureProvider,textDecoder :new TextDecoder(),textEncoder:new TextEncoder()});
     try{
         const resultWithConfig = await api.transact({
@@ -32,7 +34,6 @@ async function takeAction (api,action,contractaccount,privatekey,actor,datavalue
 
 async function getAccountCurrency(api,contractaccount,accountName,symbol)
     {
-        console.log("currency"+datavalue);
         const rpc=new JsonRpc(api,{fetch});
         try{
             const res=rpc.get_currency_balance(contractaccount,accountName,symbol);

@@ -2,9 +2,8 @@ import React from 'react';
 import FormInput from '../../components/form-input/form-input.components';
 import CustomButton from '../../components/custom-button/custom-button.components';
 import ApiService from '../../service/ApiService';
-import {eosContractAccountInfo} from '../../service/Api-Settings';
 import {connect} from 'react-redux';
-import { setFirstUser, setFirstUserBalance, setSecondUser, setSecondUserPrivateKey, setSecondUserBalance, setContractUser, setContractUserPrivateKey, setContractUserBalance} from '../../redux/user/user.actions';
+import { setUsers, setFirstUserBalance,setPrivateKeys, setSecondUserBalance} from '../../redux/user/user.actions';
 import './Login.styles.scss';
 
 
@@ -26,24 +25,22 @@ class  Login extends React.Component
     handelSubmit = event => {
        
         event.preventDefault();
-        this.props.setContractUserPrivateKey(eosContractAccountInfo.private_key);
-        this.props.setContractUser(eosContractAccountInfo.username);
+        const users=[
+            this.state.firstUser,this.state.secondUser
+        ];
+        const privatekeys=[this.state.firstUserPrivateKey,this.state.secondUserPrivateKey];
+        
         const {firstUser,firstUserPrivateKey,secondUser,secondUserPrivateKey} =this.state;
-        this.props.setFirstUser(firstUser);
-        this.props.setFirstUserPrivateKey(firstUserPrivateKey);
-        this.props.setSecondUser(secondUser);
-        this.props.etSecondUserPrivateKey(secondUserPrivateKey);
+        this.props.setUsers(users);
+        this.props.setPrivateKeys(privatekeys);
         const res1=ApiService.geteosAccountBalance(firstUser);
         res1.then(currency=>{
-            this.props.setFirstUserBalance(currency.rows[0]);
+            console.log(currency);
+            this.props.setFirstUserBalance(currency);
         });
         const res2=ApiService.geteosAccountBalance(secondUser);
         res2.then(currency=>{
-            this.props.setSecondtUserBalance(currency.rows[0]);
-        });
-        const res3=ApiService.geteosAccountBalance(eosContractAccountInfo.username);
-        res3.then(currency=>{
-            this.props.setContractUserBalance(currency.rows[0]);
+            this.props.setSecondUserBalance(currency);
         });
     }
     handelChange = event => {
@@ -83,15 +80,10 @@ const mapStateToProps =state=>({
 })
 
 const mapDispatchToProps=dispatch=>({
-    setFirstUser:user=>dispatch(setFirstUser(user)),
-    setFirstUserPrivateKey:privatekey=>dispatch(setFirstUserPrivateKey(privatekey)),
+    setUsers:users=>dispatch(setUsers(users)),
+    setPrivateKeys:privatekeys=>dispatch(setPrivateKeys(privatekeys)),
     setFirstUserBalance: currency=>dispatch(setFirstUserBalance(currency)),
-    setSecondUser:user=>dispatch(setSecondUser(user)),
-    setSecondUserPrivateKey:privatekey=>dispatch(setSecondUserPrivateKey(privatekey)),
     setSecondUserBalance: currency=>dispatch(setSecondUserBalance(currency)),
-    setContractUser:user=>dispatch(setContractUser(user)),
-    setContractUserPrivateKey:privatekey=>dispatch(setContractUserPrivateKey(privatekey)),
-    setContractUserBalance: currency=>dispatch(setContractUserBalance(currency))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Login); 

@@ -9,35 +9,32 @@ class UserPage extends React.Component{
     constructor(props)
     {
         super(props);
-        console.log(this.props.currencyBalance);
     }
     render(){
         return(
             <div className='userpage'>
                 <div className="oneUser">
-                    <div className='useractions'>
-                        <UserAction type="sell-limit" buttonName="SELL" symbol="JUNGLE"/>
-                        <UserAction type="buy-limit" buttonName="BUY" symbol="JUNGLE"
-                            currentUser={this.props.firstUser} privatekey={this.props.firstUserPrivateKey}/>
-                    </div>
                     <div className='userinfo'> 
-                        <UserProfile  currentUser={this.props.firstUser} currencyBalance={this.props.firstUserBalance}/>
+                        <UserProfile  currentUser={this.props.users[0]} currentBalance={this.props.firstUserBalance}/>
+                    </div>
+                    <div className='useractions'>
+                        <UserAction type="sell_limit" buttonName="SELL" symbol="JUNGLE"
+                            currentUser={this.props.users[0]} privatekey={this.props.privateKeys[0]}/>
+                        <UserAction type="buy_limit" buttonName="BUY" symbol="JUNGLE"
+                            currentUser={this.props.users[0]} privatekey={this.props.privateKeys[0]}/>
                     </div>
                 </div>
+              
                 <div className="oneUser">
-                    <div className='userinfo'> 
-                        <UserProfile  currentUser={this.props.contractUser} currencyBalance={this.props.contractUserBalance}/>
-                    </div>
-                </div>
-                <div className="oneUser">
-                    <div className='useractions'>
-                            <UserAction type="sell-limit" buttonName="SELL" symbol="JUNGLE"/>
-                            <UserAction type="buy-limit" buttonName="BUY" symbol="JUNGLE"
-                                currentUser={this.props.secondUser} privatekey={this.props.secondUserPrivateKey}/>
-                        </div>
                         <div className='userinfo'> 
-                            <UserProfile  currentUser={this.props.secondUser} currencyBalance={this.props.secondUserBalance}/>
-                    </div>
+                            <UserProfile  currentUser={this.props.users[1]} currentBalance={this.props.secondUserBalance}/>
+                        </div>
+                    <div className='useractions'>
+                            <UserAction type="sell_limit" buttonName="SELL" symbol="JUNGLE"
+                            currentUser={this.props.users[1]} privatekey={this.props.privateKeys[1]}/>
+                            <UserAction type="buy_limit" buttonName="BUY" symbol="JUNGLE"
+                                currentUser={this.props.users[1]} privatekey={this.props.privateKeys[1]}/>
+                        </div>
                 </div>
             </div>
             );
@@ -45,14 +42,9 @@ class UserPage extends React.Component{
 }
 
 const mapStateToProps =state=>({
-    firstUser:state.user.firstUser,
-    firstUserPrivateKey:state.user.firstUserPrivateKey,
+    users:state.user.users,
+    privateKeys:state.user.privateKeys,
     firstUserBalance:state.user.firstUserBalance,
-    contractUser:state.user.contractUser,
-    contratUserPrivateKey:state.user.contractUserPrivateKey,
-    contractUserBalance:state.user.contractUserBalance,
-    secondUser:state.user.secondUser,
-    secondUserPrivateKey:state.user.secondUserPrivateKey,
     secondUserBalance:state.user.secondUserBalance,
     
 })

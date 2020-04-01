@@ -1,5 +1,5 @@
 export const eosContractAccountInfo={
-    username:'jungledex151',
+    username:'projcarabia1',
     private_key:'5JTnHdR2g8K8eizSeVdLYV4jEMZZv5FqZraSuFXLxH1b8efTR5b'
 } ;
 export const eosTestnetApi={
